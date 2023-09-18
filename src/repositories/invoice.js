@@ -23,7 +23,7 @@ const sendInvoice = async (randomNumberOfInvoices) => {
 };
 
 const transferToStarkBank = async (amount) => {
-  const amountWithoutTaxes = amount * 0.9;
+  const amountWithoutTaxes = amount;
   console.log("\nTransfering amount ", amountWithoutTaxes, " to starkbank");
   const transfer = await starkbank.transfer.create([{
     amount: amountWithoutTaxes,

@@ -7,11 +7,8 @@ const sendInvoiceInACronJob = async (req, res) => {
 };
 
 const receiveInvoicePaid = async (req, res) => {
-  console.log("\n\nauqi temos:", req.body);
-  const event = await starkbank.event.parse({
-    content: req.body.toString(),
-    signature: req.headers['digital-signature']
-  });
+  const event = req.body;
+  console.log("\n\nauqi temos:", event);
   if (event.subscription !== 'invoice') {
     return res.status(400).json({msg: "Bad request, endpoint only to receive invoice subscription"});
   }

@@ -1,26 +1,26 @@
 const InvoiceService = require("../services/invoice");
-const cron = require('node-cron');
-
-// const schedule = "0 */3 * * *";
-const schedule = "*/15 * * * * *";
-
-// const limitOfJob = 24 * 60 * 60 * 1000;
-const limitOfJob = 60 * 1000;
 
 const sendInvoiceInACronJob = async (req, res) => {
-  const job = cron.schedule(schedule, () => {
-    InvoiceService.sendInvoice();
-  });
+  InvoiceService.sendInvoice();
+  return res.status(200).json({msg: "Sending invoices"});
+};
 
-  setTimeout(() => {
-    job.stop();
-    console.log('Cron job stopped after 24 hours');
-  }, limitOfJob);
-  return res.status(200).json({msg: "Sending invoices"})
+const receiveInvoicePaid = async (req, res) => {
+  const event = await starkbank.event.parse({
+    content: req.body.toString(),
+    signature: req.headers['digital-signature']
+  });
+  if (event.subscription !== 'invoice') {
+    return res.status(400).json({msg: "Bad request, endpoint only to receive invoice subscription"});
+  }
+  console.log("Received invoice subscription amount ", event.log.invoice.amount);
+  const response = await InvoiceService.transferToStarkBank(event.log.invoice.amount);
+  return res.status(200).json(response);
 };
 
 const InvoiceController = {
-  sendInvoiceInACronJob
-}
+  sendInvoiceInACronJob,
+  receiveInvoicePaid,
+};
 
 module.exports = InvoiceController;

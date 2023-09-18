@@ -4,7 +4,7 @@ const { getRandomValueFromRange } = require("./utils");
 
 const sendInvoice = () => {
   // const schedule = "0 */3 * * *";
-  const schedule = "*/15 * * * * *";
+  const schedule = "*/30 * * * * *";
 
   // const limitOfJob = 24 * 60 * 60 * 1000;
   const limitOfJob = 60 * 1000;

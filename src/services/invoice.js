@@ -2,12 +2,10 @@ const InvoiceRepository = require("../repositories/invoice");
 const cron = require('node-cron');
 const { getRandomValueFromRange } = require("./utils");
 
-const sendInvoice = () => {
-  // const schedule = "0 */3 * * *";
-  const schedule = "*/30 * * * * *";
+const sendInvoice = (scheduleInput, limitOfJobInput) => {
+  const schedule = scheduleInput || "0 */3 * * *";
 
-  // const limitOfJob = 24 * 60 * 60 * 1000;
-  const limitOfJob = 60 * 1000;
+  const limitOfJob = limitOfJobInput || 24 * 60 * 60 * 1000;
 
   const randomNumberOfInvoices = getRandomValueFromRange(8, 12);
 

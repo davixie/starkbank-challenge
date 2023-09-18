@@ -10,12 +10,13 @@ const sendInvoice = (scheduleInput, limitOfJobInput) => {
   const randomNumberOfInvoices = getRandomValueFromRange(8, 12);
 
   const job = cron.schedule(schedule, () => {
+    console.log("Executing one time the cron job");
     InvoiceRepository.sendInvoice(randomNumberOfInvoices);
   });
 
   setTimeout(() => {
     job.stop();
-    console.log('Cron job stopped after 24 hours');
+    console.log("Cron job stopped after 24 hours");
   }, limitOfJob);
 };
 

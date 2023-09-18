@@ -40,7 +40,7 @@ const transferToStarkBank = async (amount) => {
       })
     ],
   }]);
-  console.log("\nTransfer executed ", transfer);
+  console.log("\nTransfer executed ");
 
   return transfer;
 };

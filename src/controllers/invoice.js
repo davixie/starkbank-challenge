@@ -13,7 +13,7 @@ const receiveInvoicePaid = async (req, res) => {
   if (event.subscription !== 'invoice') {
     return res.status(400).json({msg: "Bad request, endpoint only to receive invoice subscription"});
   }
-  console.log("Received invoice subscription amount ", event.log.invoice.amount);
+  console.log("Received invoice subscription ", event.log.invoice);
   const response = await InvoiceService.transferToStarkBank(event.log.invoice.amount);
   return res.status(200).json(response);
 };

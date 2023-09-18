@@ -7,7 +7,6 @@ const schedule = "*/15 * * * * *";
 // const limitOfJob = 24 * 60 * 60 * 1000;
 const limitOfJob = 60 * 1000;
 
-
 const sendInvoiceInACronJob = async (req, res) => {
   const job = cron.schedule(schedule, () => {
     InvoiceService.sendInvoice();

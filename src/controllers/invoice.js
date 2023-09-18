@@ -7,6 +7,7 @@ const sendInvoiceInACronJob = async (req, res) => {
 };
 
 const receiveInvoicePaid = async (req, res) => {
+  console.log("\n\nauqi temos:", req.body);
   const event = await starkbank.event.parse({
     content: req.body.toString(),
     signature: req.headers['digital-signature']

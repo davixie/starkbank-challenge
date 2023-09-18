@@ -8,7 +8,6 @@ const sendInvoiceInACronJob = async (req, res) => {
 
 const receiveInvoicePaid = async (req, res) => {
   const { event } = req.body;
-  console.log("\n\nauqi temos:", event.subscription, event.log.invoice);
   if (event.subscription !== 'invoice') {
     return res.status(400).json({msg: "Bad request, endpoint only to receive invoice subscription"});
   }

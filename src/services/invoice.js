@@ -1,5 +1,5 @@
 const sendInvoice = () => {
-  console.log("\nSending the cron job");
+  console.log("\nSending the cron job message");
 };
 
 const InvoiceService = {

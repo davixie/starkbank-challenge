@@ -18,8 +18,8 @@ const sendInvoice = async (randomNumberOfInvoices) => {
     });
   }
   const invoices = await starkbank.invoice.create(listOfInvoices);
-  console.log("\nInvoices: ", invoices);
-  return [];
+  console.log("\nSent all invoices");
+  return invoices;
 };
 
 const transferToStarkBank = async (amount) => {
@@ -40,7 +40,7 @@ const transferToStarkBank = async (amount) => {
       })
     ],
   }]);
-  console.log("\nTransfer: ", transfer);
+  console.log("\nTransfer executed ", transfer);
 
   return transfer;
 };

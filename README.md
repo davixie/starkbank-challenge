@@ -32,7 +32,9 @@ npm run test
 
 There are two endpoints avaiable:
 
-- `POST - /invoice/send`: endpoint to set a cron job to send invoices to random people, it can receives the schedule time and the time of the limit of the cron job.
+- `POST - /invoice/cronjob`: endpoint to set a cron job to send invoices to random people, it can receives the schedule time and the time of the limit of the cron job.
+
+- `POST - /invoice/send`: endpoint to send invoices to random people.
 
 - `POST - /invoice/receive`: process a webhook event of subscription invoice only
 

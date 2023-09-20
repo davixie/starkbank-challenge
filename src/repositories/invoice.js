@@ -1,5 +1,5 @@
 const starkbank = require("starkbank");
-const { getRandomValueFromRange } = require("../services/utils");
+const UtilsService = require("../services/utils");
 const { cpf } = require("cpf-cnpj-validator");
 const random = require("random-name");
 
@@ -10,7 +10,7 @@ const sendInvoice = async (randomNumberOfInvoices) => {
   const listOfInvoices = [];
   for(let i = 0; i < randomNumberOfInvoices; i++) {
     listOfInvoices.push({
-      amount: getRandomValueFromRange(0, MAX_AMOUNT),
+      amount: UtilsService.getRandomValueFromRange(0, MAX_AMOUNT),
       name: random(),
       taxId: cpf.generate(true),
       fine: 2.5,
@@ -45,7 +45,9 @@ const transferToStarkBank = async (amount) => {
   return transfer;
 };
 
-module.exports = {
+const InvoiceRepository = {
   sendInvoice,
   transferToStarkBank,
 };
+
+module.exports = InvoiceRepository;

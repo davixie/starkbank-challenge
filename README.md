@@ -40,6 +40,8 @@ There are two endpoints avaiable:
 
 There is only one branch (`main`) and when a commit is pushed to github it triggers the deployment of the application on google cloud platform.
 
+Once the application is deployed a cron job to send invoices is already created.
+
 ## Structure of the code:
 
 - `configs`: It is responsible to setup all the connections and integrations needed for the application.

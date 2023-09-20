@@ -4,7 +4,7 @@ require("dotenv").config();
 
 const bootApp = async () => {
   StarkBankConnection();
-  CronJobConfig();
+  // CronJobConfig();
 };
 
 module.exports = bootApp;

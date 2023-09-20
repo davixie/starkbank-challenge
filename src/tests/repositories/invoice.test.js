@@ -4,6 +4,11 @@ const starkbank = require("starkbank");
 const { cpf } = require("cpf-cnpj-validator");
 const random = require("random-name");
 
+process.env.BANK_CODE = "1",
+process.env.BRANCH_CODE = "2",
+process.env.ACCOUNT_NUMBER = "12",
+process.env.TAX_ID = "123",
+
 jest.mock("../../services/utils", () => jest.fn());
 jest.mock("random-name", () => jest.fn());
 
@@ -59,11 +64,11 @@ describe("testing src/repositories/invoice.js", () => {
       expect(starkbank.transfer.create).toHaveBeenCalledWith([
         {
           amount: amount,
-          bankCode: "20018183",
-          branchCode: "0001",
-          accountNumber: "6341320293482496",
+          bankCode: "1",
+          branchCode: "2",
+          accountNumber: "12",
           name: "Stark Bank S.A.",
-          taxId: "20.018.183/0001-80",
+          taxId: "123",
           accountType: "payment",
           rules: [{}],
         },

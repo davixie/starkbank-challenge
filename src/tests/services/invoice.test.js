@@ -14,7 +14,7 @@ describe("testing src/services/invoice.js", () => {
     jest.clearAllMocks();
   });
 
-  describe('.sendInvoice', () => {
+  describe('.sendInvoiceInACronJob', () => {
     beforeEach(() => {
       jest.clearAllMocks();
     });
@@ -23,7 +23,7 @@ describe("testing src/services/invoice.js", () => {
       cron.schedule = jest.fn().mockReturnValue({
         stop: jest.fn(),
       });
-      InvoiceService.sendInvoice();
+      InvoiceService.sendInvoiceInACronJob();
       jest.advanceTimersByTime(24 * 60 * 60 * 1000);
 
       expect(cron.schedule).toHaveBeenCalledWith('0 */3 * * *', expect.any(Function));
@@ -35,10 +35,24 @@ describe("testing src/services/invoice.js", () => {
       cron.schedule = jest.fn().mockReturnValue({
         stop: jest.fn(),
       });
-      InvoiceService.sendInvoice(mockSchedule, mockLimitOfJob);
+      InvoiceService.sendInvoiceInACronJob(mockSchedule, mockLimitOfJob);
       jest.advanceTimersByTime(mockLimitOfJob);
 
       expect(cron.schedule).toHaveBeenCalledWith(mockSchedule, expect.any(Function));
+    });
+  });
+
+  describe(".sendInvoice", () => {
+    it("should work correctly", async () => {
+      const mockedAmount = 8;
+      UtilsService.getRandomValueFromRange = jest.fn().mockReturnValue(mockedAmount);
+      InvoiceRepository.sendInvoice = jest.fn().mockResolvedValue({});
+
+      const response = await InvoiceService.sendInvoice();
+
+      expect(InvoiceRepository.sendInvoice).toHaveBeenCalledTimes(1);
+      expect(InvoiceRepository.sendInvoice).toHaveBeenCalledWith(mockedAmount);
+      expect(response).toStrictEqual({});
     });
   });
 

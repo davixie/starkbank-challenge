@@ -20,12 +20,12 @@ describe("testing src/controllers/invoice.js", () => {
 
       const response = mockResponse();
 
-      InvoiceService.sendInvoice = jest.fn().mockReturnValue({});
+      InvoiceService.sendInvoiceInACronJob = jest.fn().mockReturnValue({});
 
       await InvoiceController.sendInvoiceInACronJob(request, response);
 
-      expect(InvoiceService.sendInvoice).toHaveBeenCalledTimes(1);
-      expect(InvoiceService.sendInvoice).toHaveBeenCalledWith(request.body.schedule, request.body.limitOfJob);
+      expect(InvoiceService.sendInvoiceInACronJob).toHaveBeenCalledTimes(1);
+      expect(InvoiceService.sendInvoiceInACronJob).toHaveBeenCalledWith(request.body.schedule, request.body.limitOfJob);
       expect(response.status).toHaveBeenCalledWith(200);
     });
 
@@ -36,12 +36,27 @@ describe("testing src/controllers/invoice.js", () => {
 
       const response = mockResponse();
 
-      InvoiceService.sendInvoice = jest.fn().mockReturnValue({});
+      InvoiceService.sendInvoiceInACronJob = jest.fn().mockReturnValue({});
 
       await InvoiceController.sendInvoiceInACronJob(request, response);
 
+      expect(InvoiceService.sendInvoiceInACronJob).toHaveBeenCalledTimes(1);
+      expect(InvoiceService.sendInvoiceInACronJob).toHaveBeenCalledWith(undefined, undefined);
+      expect(response.status).toHaveBeenCalledWith(200);
+    });
+  });
+
+  describe(".sendInvoice", () => {
+    it("should return correct values when body not empty", async () => {
+      const request = mockRequest({});
+
+      const response = mockResponse();
+
+      InvoiceService.sendInvoice = jest.fn().mockReturnValue({});
+
+      await InvoiceController.sendInvoice(request, response);
+
       expect(InvoiceService.sendInvoice).toHaveBeenCalledTimes(1);
-      expect(InvoiceService.sendInvoice).toHaveBeenCalledWith(undefined, undefined);
       expect(response.status).toHaveBeenCalledWith(200);
     });
   });

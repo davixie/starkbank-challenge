@@ -6,7 +6,7 @@ const random = require("random-name");
 const MAX_AMOUNT = 9999;
 
 const sendInvoice = async (randomNumberOfInvoices) => {
-  console.log("\nSending the cron job message");
+  console.log("\nSending invoice");
   const listOfInvoices = [];
   for(let i = 0; i < randomNumberOfInvoices; i++) {
     listOfInvoices.push({

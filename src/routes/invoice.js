@@ -3,7 +3,8 @@ const InvoiceController = require("../controllers/invoice");
 
 const InvoiceRouter = express.Router();
 
-InvoiceRouter.post("/send", InvoiceController.sendInvoiceInACronJob);
+InvoiceRouter.post("/cronjob", InvoiceController.sendInvoiceInACronJob);
+InvoiceRouter.post("/send", InvoiceController.sendInvoice);
 InvoiceRouter.post("/receive", InvoiceController.receiveInvoicePaid);
 
 module.exports = InvoiceRouter;

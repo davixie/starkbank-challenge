@@ -3,8 +3,17 @@ const InvoiceService = require("../services/invoice");
 const sendInvoiceInACronJob = async (req, res) => {
   try {
     const { schedule, limitOfJob } = req.body;
-    InvoiceService.sendInvoice(schedule, limitOfJob);
-    return res.status(200).json({msg: "Sending invoices"});
+    InvoiceService.sendInvoiceInACronJob(schedule, limitOfJob);
+    return res.status(200).json({msg: "Cron job started to send invoices"});
+  } catch(err) {
+    return res.status(500).json({ error: err });
+  }
+};
+
+const sendInvoice = async (req, res) => {
+  try {
+    await InvoiceService.sendInvoice();
+    return res.status(200).json({msg: "Sent invoices"});
   } catch(err) {
     return res.status(500).json({ error: err });
   }
@@ -26,6 +35,7 @@ const receiveInvoicePaid = async (req, res) => {
 
 const InvoiceController = {
   sendInvoiceInACronJob,
+  sendInvoice,
   receiveInvoicePaid,
 };
 

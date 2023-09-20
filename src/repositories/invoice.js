@@ -27,11 +27,11 @@ const transferToStarkBank = async (amount) => {
   console.log("\nTransfering amount ", amountWithoutTaxes, " to starkbank");
   const transfer = await starkbank.transfer.create([{
     amount: amountWithoutTaxes,
-    bankCode: "20018183",
-    branchCode: "0001",
-    accountNumber: "6341320293482496",
+    bankCode: process.env.BANK_CODE,
+    branchCode: process.env.BRANCH_CODE,
+    accountNumber: process.env.ACCOUNT_NUMBER,
     name: "Stark Bank S.A.",
-    taxId: "20.018.183/0001-80",
+    taxId: process.env.TAX_ID,
     accountType: "payment",
     rules: [
       new starkbank.transfer.Rule({

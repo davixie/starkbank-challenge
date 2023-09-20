@@ -1,4 +1,5 @@
 const bootApp = require("./configs/AppConfig");
+require("dotenv").config();
 
 const PORT = process.env.PORT || 8080;
 
